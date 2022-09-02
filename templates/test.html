@@ -27,7 +27,9 @@
             color: white;
             padding: 0.5rem;
         }
-
+        #imageFile{
+            width: 100%;
+        }
 
 
 
@@ -55,9 +57,9 @@
             width: 95%;
             max-width: 500px;
             margin: 20px auto 20px auto;
-
             box-shadow: 0px 0px 3px 0px black;
             padding: 20px;
+            display:none;
         }
 
         .mypost > button {
@@ -76,6 +78,11 @@
         }
     </style>
     <script>
+        function openUrl(){
+            $('.mypost').show();
+        }
+
+
         $(document).ready(function () {
             set_temp()
             show_comment()
@@ -93,6 +100,7 @@
         }
 
         function save_picture() {
+            $('.mypost').hide();
             $.ajax({
                 type: 'POST',
                 url: '/homework',
@@ -102,6 +110,7 @@
                     window.location.reload()
                 }
             })
+
         }
 
         function show_comment() {
@@ -134,6 +143,8 @@
     <h1>Black Pink's Gallery</h1>
     <p>Temperature in Seoul: <span id="temp">36</span>Celcius</p></a>
     <a href = "/"><button class = "blog">Blog</button></a>
+    <button class = "btn btn-dark" onclick ="openUrl()"> Upload Picture</button>
+
 </div>
 <div class="mypost">
     <div class="form-floating mb-3">
@@ -141,10 +152,10 @@
         <label for="floatingInput">Name</label>
     </div>
     <div class="form-floating">
-        <input type = "file" id = "imageFile">
+        <input type = "url" id = "imageFile" placeholder="Image URL">
 
     </div>
-    <button onclick="save_picture()" type="button" class="btn btn-dark">Submit</button>
+<button class = "btn btn-dark" onclick="save_picture()" type="button" class="btn btn-dark">Submit</button>
 </div>
 <div class="myImages" id="image-list">
 </div>
