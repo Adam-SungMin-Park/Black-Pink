@@ -10,6 +10,11 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+
 @app.route("/homework", methods=["POST"])
 def homework_post():
     name_receive = request.form['name_give']
