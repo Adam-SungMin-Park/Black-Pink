@@ -15,12 +15,12 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>Black Pink's Blog</title>
+    <title>Black Pink's Picture</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap"
           rel="stylesheet">
     <style>
-        .gallery{
+        .blog{
             text-decoration: none;
             background-color: pink;
             border-radius: 5px;
@@ -92,7 +92,7 @@
             })
         }
 
-        function save_comment() {
+        function save_picture() {
             $.ajax({
                 type: 'POST',
                 url: '/homework',
@@ -131,9 +131,9 @@
 </head>
 <body>
 <div class="mypic">
-    <h1>Black Pink's Blog</h1>
+    <h1>Black Pink's Gallery</h1>
     <p>Temperature in Seoul: <span id="temp">36</span>Celcius</p></a>
-    <a href = "/test"><button class = "gallery">Gallery</button></a>
+    <a href = "/"><button class = "blog">Blog</button></a>
 </div>
 <div class="mypost">
     <div class="form-floating mb-3">
@@ -141,13 +141,12 @@
         <label for="floatingInput">Name</label>
     </div>
     <div class="form-floating">
-<textarea class="form-control" placeholder="Leave a comment here" id="comment"
-          style="height: 100px"></textarea>
-        <label for="floatingTextarea2">Comment</label>
+        <input type = "file" id = "imageFile">
+
     </div>
-    <button onclick="save_comment()" type="button" class="btn btn-dark">Submit</button>
+    <button onclick="save_picture()" type="button" class="btn btn-dark">Submit</button>
 </div>
-<div class="mycards" id="comment-list">
+<div class="myImages" id="image-list">
 </div>
 </body>
 </html>
