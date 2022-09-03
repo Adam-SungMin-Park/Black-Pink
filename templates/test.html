@@ -122,12 +122,12 @@
             alert('show picture')
             $.ajax({
                 type: 'GET',
-                url: '/test',
+                url: '/homework',
                 data: {},
                 success: function (response) {
 
-                    console.log(response)
-                    /*for (i = 0; i < data.length; i++) {
+                    let data = response.pic
+                    for (i = 0; i < data.length; i++) {
                         let fanName = data[i].name;
                         let fanImage = data[i].image;
                         let html = `<div class="card">
@@ -138,8 +138,8 @@
                                             </blockquote>
                                         </div>
                                     </div>`
-                        $('#comment-list').append(html);
-                    }*/
+                        $('#image-list').append(html);
+                    }
                 }
             });
         }

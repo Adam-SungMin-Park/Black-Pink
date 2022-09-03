@@ -18,6 +18,13 @@ def test():
     return render_template('test.html')
 
 
+@app.route('/test')
+def picture_get():
+    all_picture = list(db.fansGallery.find({},{'_id': False}))
+
+    print(jsonify(all_picture))
+
+
 @app.route("/test", methods=["POST"])
 def picture_post():
     image_receive = request.form['image_give']
@@ -29,13 +36,6 @@ def picture_post():
     }
     db.fansGallery.insert_one(doc)
     return jsonify({'msg': 'picture uploaded!'})
-
-
-@app.route('/test', methods=['GET'])
-def picture_get():
-    all_picture = list(db.fansGallery.find({},{'_id': False}))
-    return jsonify({'msg': all_picture })
-
 
 
 @app.route("/homework", methods=["POST"])
@@ -54,7 +54,10 @@ def homework_post():
 @app.route("/homework", methods=["GET"])
 def homework_get():
     allFans = list(db.fans.find({}, {'_id': False}))
-    return jsonify({'msg': allFans})
+    all_picture = list(db.fansGallery.find({}, {'_id': False}))
+    return jsonify({'msg': allFans, 'pic':all_picture})
+
+
 
 
 if __name__ == '__main__':
