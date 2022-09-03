@@ -29,7 +29,10 @@
         }
         #imageFile{
             width: 100%;
-            max-width:95%;
+
+        }
+        #uploadPicture{
+            margin-top: 1rem;
         }
 
 
@@ -86,7 +89,7 @@
 
         $(document).ready(function () {
             set_temp()
-            show_comment()
+            show_picture()
         });
 
         function set_temp() {
@@ -100,40 +103,43 @@
             })
         }
 
-        function save_picture() {
+        function picture_post() {
             $('.mypost').hide();
             $.ajax({
                 type: 'POST',
-                url: '/homework',
-                data: {name_give: $('#name').val(), comment_give: $('#comment').val()},
+                url: '/test',
+                data: {name_give: $('#name').val(), image_give: $('#imageFile').val()},
                 success: function (response) {
+                    alert(response)
                     alert(response['msg'])
-                    window.location.reload()
+
                 }
             })
 
         }
 
-        function show_comment() {
+        function show_picture() {
+            alert('show picture')
             $.ajax({
-                type: "GET",
-                url: "/homework",
+                type: 'GET',
+                url: '/test',
                 data: {},
                 success: function (response) {
-                    let data = response.msg
-                    for (i = 0; i < data.length; i++) {
+
+                    console.log(response)
+                    /*for (i = 0; i < data.length; i++) {
                         let fanName = data[i].name;
-                        let fanComment = data[i].comment;
+                        let fanImage = data[i].image;
                         let html = `<div class="card">
                                         <div class="card-body">
                                             <blockquote class="blockquote mb-0">
-                                                <p>${fanComment}</p>
+                                                <img src = "${fanImage}"></img>
                                                 <footer class="blockquote-footer">${fanName}</footer>
                                             </blockquote>
                                         </div>
                                     </div>`
                         $('#comment-list').append(html);
-                    }
+                    }*/
                 }
             });
         }
@@ -144,7 +150,7 @@
     <h1>Black Pink's Gallery</h1>
     <p>Temperature in Seoul: <span id="temp">36</span>Celcius</p></a>
     <a href = "/"><button class = "blog">Blog</button></a>
-    <button class = "btn btn-dark" onclick ="openUrl()"> Upload Picture</button>
+    <button id = "uploadPicture" class = "btn btn-dark" onclick ="openUrl()"> Upload Picture</button>
 
 </div>
 <div class="mypost">
@@ -156,7 +162,7 @@
         <input type = "url" id = "imageFile" placeholder="Image URL">
 
     </div>
-<button class = "btn btn-dark" onclick="save_picture()" type="button" class="btn btn-dark">Submit</button>
+<button class = "btn btn-dark" onclick="picture_post()" type="button" class="btn btn-dark">Submit</button>
 </div>
 <div class="myImages" id="image-list">
 </div>
