@@ -27,12 +27,18 @@
             color: white;
             padding: 0.5rem;
         }
-        #imageFile{
+        #imageFile {
             width: 100%;
-
         }
+        #image-list{
+            text-align:center;
+        }
+
         #uploadPicture{
             margin-top: 1rem;
+        }
+        #pictureName{
+            margin-top:1rem;
         }
 
 
@@ -110,16 +116,13 @@
                 url: '/test',
                 data: {name_give: $('#name').val(), image_give: $('#imageFile').val()},
                 success: function (response) {
-                    alert(response)
-                    alert(response['msg'])
-
+                    window.location.reload();
                 }
             })
 
         }
 
         function show_picture() {
-            alert('show picture')
             $.ajax({
                 type: 'GET',
                 url: '/homework',
@@ -133,11 +136,12 @@
                                         <div class="card-body">
                                             <blockquote class="blockquote mb-0">
                                                 <img src = "${fanImage}"></img>
-                                                <footer class="blockquote-footer">${fanName}</footer>
+                                                <footer class="blockquote-footer" id ="pictureName">${fanName}</footer>
                                             </blockquote>
                                         </div>
                                     </div>`
                         $('#image-list').append(html);
+
                     }
                 }
             });
