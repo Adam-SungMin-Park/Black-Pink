@@ -137,6 +137,29 @@
 
         }
 
+        function updatePic(res){
+            $('.card').hide();
+            let html = `<div class="form-floating mb-3" id = "updateForm">
+                            <input type="text" class="form-control" id="name" placeholder="url">
+                            <label for="floatingInput">Name</label>
+                        <div class="form-floating">
+                            <input type = "url" id = "imageFile" placeholder="Image URL">
+                        </div>
+                            <button class = "btn btn-dark" onclick="updateSubmit(${res})" type="button" class="btn btn-dark">Update</button>
+                            <button class = "btn btn-dark" onclick="cancelUpdate()" type="button" class="btn btn-dark">Cancel</button>
+                        </div>`
+            $('.myImages').append(html);
+        }
+
+        function updateSubmit(res){
+            console.log(res)
+        }
+
+        function cancelUpdate(){
+            $('.card').show();
+            $('#updateForm').hide();
+
+        }
         function show_picture() {
             $.ajax({
                 type: 'GET',
@@ -153,7 +176,7 @@
                                             <blockquote class="blockquote mb-0">
                                                 <img src = "${fanImage}"></img>
                                                 <footer class="blockquote-footer" id ="pictureName">${fanName}</footer>
-                                                <button class="btn btn-dark">Update</button>
+                                                <button onclick = "updatePic(${imageId})" class="btn btn-dark">Update</button>
                                                 <button onclick = "deletePic(${imageId})" class="btn btn-dark">Delete</button>
                                             </blockquote>
                                         </div>
