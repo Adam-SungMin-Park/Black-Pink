@@ -29,12 +29,21 @@ def picture_get():
 def picture_post():
     image_receive = request.form['image_give']
     name_receive = request.form['name_give']
+    pictures = list(db.fansGallery.find({}, {'_id': False}))
+    count = len(pictures) + 1
     doc = {
+        'id' : count,
         'name': name_receive,
         'image': image_receive
     }
     db.fansGallery.insert_one(doc)
     return jsonify({'msg': 'picture uploaded!'})
+
+@app.route('/galleryDelete', methods = ["DELETE"])
+def gallery_delete():
+    imageId = int(request.form['id_give'])
+    db.fansGallery.delete_one({'id':imageId})
+    return jsonify({'msg':'deleted!'})
 
 
 @app.route("/homework", methods=["POST"])
@@ -55,13 +64,18 @@ def homework_post():
 @app.route("/homework", methods=["GET"])
 def homework_get():
     allFans = list(db.fans.find({}, {'_id': False}))
-    all_picture = list(db.fansGallery.find({}, {'_id': False}))
-    return jsonify({'msg': allFans, 'pic':all_picture})
+    return jsonify({'msg': allFans})
+
+
+@app.route('/gallery', methods = ["GET"])
+def gallery_show():
+    pictures = list(db.fansGallery.find({}, {'_id': False}))
+    return jsonify({'pic': pictures})
 
 
 @app.route("/homeworkDelete", methods = ["DELETE"])
 def comment_delete():
-    id_receive= int(request.form['id_give'])
+    id_receive = int(request.form['id_give'])
     db.fans.delete_one({'id': id_receive})
     return jsonify({'msg':'Deleted'})
 

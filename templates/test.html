@@ -121,24 +121,40 @@
             })
 
         }
+        function deletePic(res){
+            $.ajax({
+                type:"DELETE",
+                url:"/galleryDelete",
+                data:{
+                    id_give:res
+                },
+                success: function(response){
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            })
+
+
+        }
 
         function show_picture() {
             $.ajax({
                 type: 'GET',
-                url: '/homework',
+                url: '/gallery',
                 data: {},
                 success: function (response) {
                     let data = response.pic
                     for (i = 0; i < data.length; i++) {
                         let fanName = data[i].name;
                         let fanImage = data[i].image;
-                        let html = `<div class="card">
+                        let imageId = data[i].id;
+                        let html = `<div id = ${imageId} class="card">
                                         <div class="card-body">
                                             <blockquote class="blockquote mb-0">
                                                 <img src = "${fanImage}"></img>
                                                 <footer class="blockquote-footer" id ="pictureName">${fanName}</footer>
-                                                <button>Update</button>
-                                                <button>Delete</button>
+                                                <button class="btn btn-dark">Update</button>
+                                                <button onclick = "deletePic(${imageId})" class="btn btn-dark">Delete</button>
                                             </blockquote>
                                         </div>
                                     </div>`
