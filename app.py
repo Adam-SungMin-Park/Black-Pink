@@ -66,6 +66,13 @@ def comment_delete():
     return jsonify({'msg':'Deleted'})
 
 
+@app.route('/homeworkUpdate', methods = ["PUT"])
+def updateComment():
+    id_receive = int(request.form['id_give'])
+    name_receive = request.form['name_give']
+    comment_receive = request.form['comment_give']
+    db.fans.update_one({'id':id_receive}, {'$set': {'name': name_receive, 'comment': comment_receive}})
+    return jsonify({'msg':'updated comment'})
 
 
 if __name__ == '__main__':

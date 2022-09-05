@@ -63,6 +63,19 @@
             padding: 20px;
         }
 
+        .mypost-update {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 20px auto;
+            box-shadow: 0px 0px 3px 0px black;
+            padding: 20px;
+        }
+
+        .mypost-update > button {
+            margin-top: 15px;
+        }
+
+
         .mypost > button {
             margin-top: 15px;
         }
@@ -153,22 +166,48 @@
             $('.mycards').hide()
             $('.mypost').hide()
             let html = `
-                         <div class="mypost">
+                         <div class="mypost-update">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="name" placeholder="url">
+                                <input type="text" class="form-control" id="updateName" placeholder="url">
                                 <label for="floatingInput">Name</label>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+                                <textarea class="form-control" placeholder="Leave a comment here" id="updateComment"
                                   style="height: 100px"></textarea>
                                 <label for="floatingTextarea2">Comment</label>
                             </div>
-                            <button onclick="save_comment()" type="button" class="btn btn-dark">Update</button>
-                            <button onclick="save_comment()" type="button" class="btn btn-dark">Cancel</button>
-
+                            <button onclick="updateComment(${res})" type="button" class="btn btn-dark">Update</button>
+                            <button onclick="cancelUpdate()" type="button" class="btn btn-dark">Cancel</button>
                         </div>
                         `
             $('body').append(html)
+        }
+
+        function cancelUpdate() {
+            window.location.reload();
+            $('.mycards').show()
+            $('.mypost').show()
+            $('.mypost-update').hide()
+        }
+
+        function updateComment(res){
+            console.log(res)
+            let name = $('#updateName').val()
+            let comment = $('#updateComment').val()
+            $.ajax({
+                type: "PUT",
+                url:"/homeworkUpdate",
+                data:{
+                    id_give: res,
+                    name_give: name,
+                    comment_give : comment
+                },
+                success: function (response){
+                    alert(response['msg'])
+                    cancelUpdate();
+                }
+            })
+
         }
     </script>
 </head>
@@ -187,7 +226,7 @@
     </div>
     <div class="form-floating">
         <textarea class="form-control" placeholder="Leave a comment here" id="comment"
-          style="height: 100px"></textarea>
+                  style="height: 100px"></textarea>
         <label for="floatingTextarea2">Comment</label>
     </div>
     <button onclick="save_comment()" type="button" class="btn btn-dark">Submit</button>
