@@ -142,6 +142,7 @@
                 data: {},
                 success: function (response) {
                     let data = response.msg
+                    console.log(typeof(response.test))
                     for (i = 0; i < data.length; i++) {
                         let fanName = data[i]['name'];
                         let fanComment = data[i]['comment'];
