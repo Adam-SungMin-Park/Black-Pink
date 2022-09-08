@@ -133,8 +133,27 @@
                     window.location.reload()
                 }
             })
+        }
 
+        function cancel_post(){
+             $('.mypost').hide();
+        }
 
+        function updatePic(res){
+            alert(res)
+            let html = `
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="url">
+                    <label for="floatingInput">Name</label>
+                </div>
+                <div class="form-floating">
+                    <input type = "url" id = "imageFile" placeholder="Image URL">
+                </div>
+                <button class = "btn btn-dark" onclick="picture_post()" type="button" class="btn btn-dark">Submit</button>
+                <button class = "btn btn-dark" onclick="cancel_post()" type="button" class="btn btn-dark">cancel</button>
+            `
+            $('#' + res).append(html)
         }
 
         function show_picture() {
@@ -155,7 +174,7 @@
                                             <blockquote class="blockquote mb-0">
                                                 <img src = "${fanImage}"></img>
                                                 <footer class="blockquote-footer" id ="pictureName">${fanName}</footer>
-                                                <button class="btn btn-dark">Update</button>
+                                                <button onclick = "updatePic(${imageId})" class="btn btn-dark">Update</button>
                                                 <button onclick = "deletePic(${imageId})" class="btn btn-dark">Delete</button>
                                             </blockquote>
                                         </div>
@@ -183,9 +202,9 @@
     </div>
     <div class="form-floating">
         <input type = "url" id = "imageFile" placeholder="Image URL">
-
     </div>
-<button class = "btn btn-dark" onclick="picture_post()" type="button" class="btn btn-dark">Submit</button>
+    <button class = "btn btn-dark" onclick="picture_post()" type="button" class="btn btn-dark">Submit</button>
+    <button class = "btn btn-dark" onclick="cancel_post()" type="button" class="btn btn-dark">cancel</button>
 </div>
 <div class="myImages" id="image-list">
 </div>
