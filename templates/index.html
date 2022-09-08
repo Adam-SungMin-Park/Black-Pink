@@ -89,7 +89,12 @@
         .mycards > .card {
             margin-top: 10px;
             margin-bottom: 10px;
-        }/Users/adampark/Desktop/sparta/project/homework/app.py
+        }
+
+        /Users/ adampark /Desktop/ sparta /project/ homework
+
+        /
+        app.py
     </style>
     <script>
         $(document).ready(function () {
@@ -142,7 +147,7 @@
                 data: {},
                 success: function (response) {
                     let data = response.msg
-                    console.log(typeof(response.test))
+                    console.log(typeof (response.test))
                     for (i = 0; i < data.length; i++) {
                         let fanName = data[i]['name'];
                         let fanComment = data[i]['comment'];
@@ -191,19 +196,19 @@
             $('.mypost-update').hide()
         }
 
-        function updateComment(res){
+        function updateComment(res) {
             console.log(res)
             let name = $('#updateName').val()
             let comment = $('#updateComment').val()
             $.ajax({
                 type: "PUT",
-                url:"/homeworkUpdate",
-                data:{
+                url: "/homeworkUpdate",
+                data: {
                     id_give: res,
                     name_give: name,
-                    comment_give : comment
+                    comment_give: comment
                 },
-                success: function (response){
+                success: function (response) {
                     alert(response['msg'])
                     cancelUpdate();
                 }
