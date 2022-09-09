@@ -147,6 +147,7 @@
         function cancel_post() {
             $('.mypost').hide();
             $('.updateForm').hide();
+            $('.buttons').show();
         }
 
         function picture_update(res) {
@@ -181,10 +182,12 @@
                         <input type = "url" id = "updateUrl" placeholder="Image URL">
                     </div>
                     <button class = "btn btn-dark" onclick="picture_update(${res})" type="button" class="btn btn-dark">Submit</button>
-                    <button class = "btn btn-dark" onclick="cancel_post()" type="button" class="btn btn-dark">cancel</button>
+                    <button class = "btn btn-dark" onclick="cancel_post()" type="button" class="btn btn-dark">Cancel</button>
                 </div>
 `
             $('#' + res).append(html)
+            $('.buttons').hide()
+
         }
 
         function updatePic(res){
@@ -228,8 +231,10 @@
                                             <blockquote class="blockquote mb-0">
                                                 <img src = "${fanImage}"></img>
                                                 <footer class="blockquote-footer" id ="pictureName">${fanName}</footer>
-                                                <button onclick = "updatePic(${imageId})" class="btn btn-dark">Update</button>
-                                                <button onclick = "deletePic(${imageId})" class="btn btn-dark">Delete</button>
+                                                <div class = "buttons">
+                                                    <button onclick = "updatePic(${imageId})" class="btn btn-dark">Update</button>
+                                                    <button onclick = "deletePic(${imageId})" class="btn btn-dark">Delete</button>
+                                                </div>
                                             </blockquote>
                                         </div>
                                     </div>`
