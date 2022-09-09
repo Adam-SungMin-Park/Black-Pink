@@ -26,7 +26,8 @@ def genUUID():
 def picture_post():
     image_receive = request.form['image_give']
     name_receive = request.form['name_give']
-
+    if  name_receive == "" or image_receive == "":
+        return jsonify({'msg': 'fill in the form'})
     doc = {
         'id': genUUID(),
         'name': name_receive,
@@ -47,6 +48,8 @@ def gallery_delete():
 def homework_post():
     name_receive = request.form['name_give']
     comment_receive = request.form['comment_give']
+    if name_receive == "" or comment_receive == "":
+        return jsonify({'msg': 'fill in the form'})
 
     doc = {
         'id': genUUID(),
@@ -82,6 +85,8 @@ def update_gallery():
     id_receive = request.form['id_give']
     name_receive = request.form['name_give']
     url_receive = request.form['url_give']
+    if id_receive == "" or name_receive == "" or url_receive == "":
+        return jsonify({'msg': 'fill in the form'})
     db.fansGallery.update_one({'id': id_receive}, {'$set': {'name': name_receive, 'image': url_receive}})
     return jsonify({'msg': 'updated gallery!'})
 
@@ -91,6 +96,8 @@ def updateComment():
     id_receive = request.form['id_give']
     name_receive = request.form['name_give']
     comment_receive = request.form['comment_give']
+    if id_receive == "" or name_receive == "" or comment_receive == "":
+        return jsonify({'msg': 'Fill in the form!'})
     db.fans.update_one({'id': id_receive}, {'$set': {'name': name_receive, 'comment': comment_receive}})
     return jsonify({'msg': 'updated comment'})
 
